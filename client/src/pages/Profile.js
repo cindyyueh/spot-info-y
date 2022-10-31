@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
 import { getCurrentUserProfile } from '../spotify';
+import styled from 'styled-components';
+
+const StyledProfileContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -16,18 +25,22 @@ const Profile = () => {
 
   return (
     <>
-      {profile && (
+      <StyledProfileContainer>
+        {profile && (
+          <div>
+            <h1>Hi, {profile.display_name}!</h1>
+            <p>You have {profile.followers.total} followers.</p>
+            {profile.images.length && profile.images[0].url && (
+              <img src={profile.images[0].url} alt='Avatar' />
+            )}
+          </div>
+        )}
         <div>
-          <h1>Hi, {profile.display_name}!</h1>
-          <p>You have {profile.followers.total} followers.</p>
-          {profile.images.length && profile.images[0].url && (
-            <img src={profile.images[0].url} alt='Avatar' />
-          )}
+          <a href='/short'>Short Term Pie - </a>
+          <a href='/med'>Medium Term Pie - </a>
+          <a href='/long'>Long Term Pie</a>
         </div>
-      )}
-      <a href='/short'>Short Term Pie - </a>
-      <a href='/med'>Medium Term Pie - </a>
-      <a href='/long'>Long Term Pie</a>
+      </StyledProfileContainer>
     </>
   );
 };
