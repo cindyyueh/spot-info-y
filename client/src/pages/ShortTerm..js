@@ -5,6 +5,14 @@ import ChartComponent from './ChartComponent';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
+const StyledTermContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 const StyledBackButton = styled.button`
   position: absolute;
   top: var(--spacing-sm);
@@ -36,6 +44,8 @@ const ShortTerm = () => {
 
     catchErrors(fetchData());
   }, []);
+
+  console.log(topArtistsShort)
 
   let genreHash = {};
 
@@ -70,12 +80,15 @@ const ShortTerm = () => {
       <Link to='/'>
         <StyledBackButton>Back</StyledBackButton>
       </Link>
+      {/* <StyledTermContainer> */}
       {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
+      <div>
+
       <h1>TOP ARTISTS SHORT TERM (past 4 weeks)</h1>
       {topArtistsShort.map((artist) => {
         return (
           <div key={artist.id}>
-            {artist.name} - GENRES: {artist.genres.map((genre) => `${genre}, `)}
+            {artist.name} <img src={artist.images[0].url} style={{ width: "7%", height: "7%" }} alt='Artist' />
           </div>
         );
       })}
@@ -83,11 +96,13 @@ const ShortTerm = () => {
       {topTracksShort.map((track) => {
         return (
           <div key={track.id}>
-            {track.name} - ARTISTS:
+            {track.name} -
             {track.artists.map((artist) => `${artist.name}, `)}
           </div>
         );
       })}
+      </div>
+      {/* </StyledTermContainer> */}
     </>
   );
 };
