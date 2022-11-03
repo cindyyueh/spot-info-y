@@ -123,8 +123,14 @@ const ShortTerm = () => {
             {topTracksShort.map((track) => {
               return (
                 <p key={track.id}>
-                  {track.name}{' ~ '}
-                  {track.artists.map((artist) => `${artist.name} `)}
+                  {track.name}
+                  {' - '}
+                  {track.artists.map((artist, idx) => {
+                    if (idx === track.artists.length - 1) {
+                      return `${artist.name} `;
+                    }
+                    return `${artist.name}, `;
+                  })}
                   <img
                     src={track.album.images[0].url}
                     style={{ width: '10%', height: '10%' }}
