@@ -60,7 +60,6 @@ const ShortTerm = () => {
     catchErrors(fetchData());
   }, []);
 
-  console.log(topTracksShort);
   let genreHash = {};
 
   for (let i = 0; i < topArtistsShort.length; i++) {
@@ -95,7 +94,7 @@ const ShortTerm = () => {
         <StyledBackButton>Back</StyledBackButton>
       </Link>
       <div class='flexbox-container'>
-      <h1>Your Short Term Donut!</h1>
+        <h1>Your Short Term Donut!</h1>
         {result.length > 0 ? (
           <ChartComponent data={result} />
         ) : (
@@ -109,12 +108,12 @@ const ShortTerm = () => {
             {topArtistsShort.map((artist) => {
               return (
                 <p key={artist.id}>
-                  {artist.name}{' '}
                   <img
                     src={artist.images[0].url}
                     style={{ width: '15%', height: '10%' }}
                     alt='Artist'
                   />
+                  {' '}{artist.name}
                 </p>
               );
             })}
@@ -124,7 +123,12 @@ const ShortTerm = () => {
             {topTracksShort.map((track) => {
               return (
                 <p key={track.id}>
-                  {track.name}
+                  <img
+                    src={track.album.images[0].url}
+                    style={{ width: '11%', height: '10%' }}
+                    alt='Track'
+                  />
+                  {' '}{track.name}
                   {' - '}
                   {track.artists.map((artist, idx) => {
                     if (idx === track.artists.length - 1) {
@@ -132,11 +136,6 @@ const ShortTerm = () => {
                     }
                     return `${artist.name}, `;
                   })}
-                  <img
-                    src={track.album.images[0].url}
-                    style={{ width: '11%', height: '10%' }}
-                    alt='Track'
-                  />
                 </p>
               );
             })}

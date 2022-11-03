@@ -13,6 +13,8 @@ const StyledProfileContainer = styled.main`
 
 const StyledLinkButton = styled.a`
   display: inline-block;
+  top: var(--spacing-sm);
+  left: var(--spacing-md);
   background-color: var(--green);
   color: var(--white);
   border-radius: var(--border-radius-pill);
