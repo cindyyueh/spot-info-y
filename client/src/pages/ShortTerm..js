@@ -95,6 +95,7 @@ const ShortTerm = () => {
         <StyledBackButton>Back</StyledBackButton>
       </Link>
       <div class='flexbox-container'>
+      <h1>Your Short Term Donut!</h1>
         {result.length > 0 ? (
           <ChartComponent data={result} />
         ) : (
@@ -111,7 +112,7 @@ const ShortTerm = () => {
                   {artist.name}{' '}
                   <img
                     src={artist.images[0].url}
-                    style={{ width: '10%', height: '10%' }}
+                    style={{ width: '15%', height: '10%' }}
                     alt='Artist'
                   />
                 </p>
@@ -133,7 +134,7 @@ const ShortTerm = () => {
                   })}
                   <img
                     src={track.album.images[0].url}
-                    style={{ width: '10%', height: '10%' }}
+                    style={{ width: '11%', height: '10%' }}
                     alt='Track'
                   />
                 </p>
