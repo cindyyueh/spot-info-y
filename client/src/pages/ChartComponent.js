@@ -38,10 +38,10 @@ class DonutChart extends Component {
     const svg = d3
       .select(this.chRef.current)
       .append('svg')
-      .attr('width', '50%')
-      .attr('height', '50%')
+      .attr('width', '45%')
+      .attr('height', '45%')
       .attr('viewBox', '0 0 ' + width + ' ' + width)
-      //.attr('preserveAspectRatio','xMinYMin')
+      .attr('preserveAspectRatio', 'xMinYMin')
       .append('g')
       .attr(
         'transform',
@@ -50,7 +50,8 @@ class DonutChart extends Component {
           ',' +
           Math.min(width, height) / 2 +
           ')'
-      );
+      )
+      .attr('class', 'donut-style');
 
     let pie = d3.pie().value((d) => d.value);
     let data_ready = pie(data);
@@ -123,7 +124,7 @@ class DonutChart extends Component {
         return tooltip.style('visibility', 'hidden');
       });
 
-    var legendG = svg.selectAll(".legend")
+    var legendG = svg.selectAll('.legend');
 
     // var legendRectSize = 13;
     // var legendSpacing = 7;
@@ -185,11 +186,7 @@ class DonutChart extends Component {
   }
 
   render() {
-    return (
-      <>
-        <div ref={this.chRef}></div>
-      </>
-    );
+    return <div ref={this.chRef} width='100%' display="block" margin="auto"></div>;
   }
 }
 

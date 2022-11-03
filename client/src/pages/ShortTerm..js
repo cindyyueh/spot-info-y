@@ -6,7 +6,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 const StyledTermContainer = styled.main`
-  display: flex;
+  display: grid;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -29,6 +29,21 @@ const StyledBackButton = styled.button`
   }
 `;
 
+export const Column = styled.div`
+  flex: ${(props) => props.size};
+`;
+
+export const Grid = styled.div`
+  display: grid
+  grid-template-areas: "column column"
+  grid-gap: 5px
+  justify-content: center;
+`;
+
+export const Row = styled.div`
+  display: flex;
+`;
+
 const ShortTerm = () => {
   const [topArtistsShort, setTopArtistsShort] = useState([]);
   const [topTracksShort, setTopTracksShort] = useState([]);
@@ -36,17 +51,16 @@ const ShortTerm = () => {
   useEffect(() => {
     const fetchData = async () => {
       const userTopArtistsShort = await getTopArtistsShort();
-      setTopArtistsShort(userTopArtistsShort.data.items);
+      setTopArtistsShort(userTopArtistsShort.data.items.slice(0, 5));
 
       const userTopTracksShort = await getTopTracksShort();
-      setTopTracksShort(userTopTracksShort.data.items);
+      setTopTracksShort(userTopTracksShort.data.items.slice(0, 5));
     };
 
     catchErrors(fetchData());
   }, []);
 
-  console.log(topArtistsShort)
-
+  console.log(topTracksShort);
   let genreHash = {};
 
   for (let i = 0; i < topArtistsShort.length; i++) {
@@ -80,29 +94,48 @@ const ShortTerm = () => {
       <Link to='/'>
         <StyledBackButton>Back</StyledBackButton>
       </Link>
-      {/* <StyledTermContainer> */}
-      {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
-      <div>
-
-      <h1>TOP ARTISTS SHORT TERM (past 4 weeks)</h1>
-      {topArtistsShort.map((artist) => {
-        return (
-          <div key={artist.id}>
-            {artist.name} <img src={artist.images[0].url} style={{ width: "7%", height: "7%" }} alt='Artist' />
-          </div>
-        );
-      })}
-      <h1>TOP TRACKS SHORT TERM (past 4 weeks)</h1>
-      {topTracksShort.map((track) => {
-        return (
-          <div key={track.id}>
-            {track.name} -
-            {track.artists.map((artist) => `${artist.name}, `)}
-          </div>
-        );
-      })}
+      <div class='flexbox-container'>
+        {result.length > 0 ? (
+          <ChartComponent data={result} />
+        ) : (
+          <p>oops :( not logged in!</p>
+        )}
       </div>
-      {/* </StyledTermContainer> */}
+      <Grid>
+        <Row>
+          <Column>
+            <h1>TOP ARTISTS (past 4 weeks)</h1>
+            {topArtistsShort.map((artist) => {
+              return (
+                <p key={artist.id}>
+                  {artist.name}{' '}
+                  <img
+                    src={artist.images[0].url}
+                    style={{ width: '10%', height: '10%' }}
+                    alt='Artist'
+                  />
+                </p>
+              );
+            })}
+          </Column>
+          <Column>
+            <h1>TOP TRACKS (past 4 weeks)</h1>
+            {topTracksShort.map((track) => {
+              return (
+                <p key={track.id}>
+                  {track.name}{' ~ '}
+                  {track.artists.map((artist) => `${artist.name} `)}
+                  <img
+                    src={track.album.images[0].url}
+                    style={{ width: '10%', height: '10%' }}
+                    alt='Track'
+                  />
+                </p>
+              );
+            })}
+          </Column>
+        </Row>
+      </Grid>
     </>
   );
 };
