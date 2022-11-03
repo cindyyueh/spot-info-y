@@ -85,7 +85,7 @@ const LongTerm = () => {
       <Link to='/'>
         <StyledBackButton>Back</StyledBackButton>
       </Link>
-      <div>
+      <div className='flexbox-container'>
         <h1>Your Long Term Donut!</h1>
         {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
       </div>
@@ -100,8 +100,8 @@ const LongTerm = () => {
                     src={artist.images[0].url}
                     style={{ width: '15%', height: '10%' }}
                     alt='Artist'
-                  />
-                  {' '}{artist.name}
+                  />{' '}
+                  {artist.name}
                 </p>
               );
             })}
@@ -115,8 +115,8 @@ const LongTerm = () => {
                     src={track.album.images[0].url}
                     style={{ width: '11%', height: '10%' }}
                     alt='Track'
-                  />
-                  {' '}{track.name}
+                  />{' '}
+                  {track.name}
                   {' - '}
                   {track.artists.map((artist, idx) => {
                     if (idx === track.artists.length - 1) {

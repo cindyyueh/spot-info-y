@@ -85,7 +85,7 @@ const MediumTerm = () => {
       <Link to='/'>
         <StyledBackButton>Back</StyledBackButton>
       </Link>
-      <div class='flexbox-container'>
+      <div className='flexbox-container'>
         <h1>Your Medium Term Donut!</h1>
         {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
       </div>
