@@ -21,6 +21,21 @@ const StyledBackButton = styled.button`
   }
 `;
 
+export const Column = styled.div`
+  flex: ${(props) => props.size};
+`;
+
+export const Grid = styled.div`
+  display: grid
+  grid-template-areas: "column column"
+  grid-gap: 5px
+  justify-content: center;
+`;
+
+export const Row = styled.div`
+  display: flex;
+`;
+
 const LongTerm = () => {
   const [topArtistsLong, setTopArtistsLong] = useState([]);
   const [topTracksLong, setTopTracksLong] = useState([]);
@@ -70,25 +85,51 @@ const LongTerm = () => {
       <Link to='/'>
         <StyledBackButton>Back</StyledBackButton>
       </Link>
-      {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
-      <h1>TOP ARTISTS LONG TERM (past 12 months)</h1>
-      {topArtistsLong.map((artist) => {
-        return (
-          <div key={artist.id}>
-            {artist.name} - GENRES: {artist.genres.map((genre) => `${genre}, `)}
-          </div>
-        );
-      })}
-
-      <h1>TOP TRACKS LONG TERM (past 12 months)</h1>
-      {topTracksLong.map((track) => {
-        return (
-          <div key={track.id}>
-            {track.name} - ARTISTS:{' '}
-            {track.artists.map((artist) => `${artist.name}, `)}
-          </div>
-        );
-      })}
+      <div>
+        <h1>Your Long Term Donut!</h1>
+        {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
+      </div>
+      <Grid>
+        <Row>
+          <Column>
+            <h1>TOP ARTISTS (past 12 months)</h1>
+            {topArtistsLong.map((artist) => {
+              return (
+                <p key={artist.id}>
+                  <img
+                    src={artist.images[0].url}
+                    style={{ width: '15%', height: '10%' }}
+                    alt='Artist'
+                  />
+                  {' '}{artist.name}
+                </p>
+              );
+            })}
+          </Column>
+          <Column>
+            <h1>TOP TRACKS (past 12 months)</h1>
+            {topTracksLong.map((track) => {
+              return (
+                <p key={track.id}>
+                  <img
+                    src={track.album.images[0].url}
+                    style={{ width: '11%', height: '10%' }}
+                    alt='Track'
+                  />
+                  {' '}{track.name}
+                  {' - '}
+                  {track.artists.map((artist, idx) => {
+                    if (idx === track.artists.length - 1) {
+                      return `${artist.name} `;
+                    }
+                    return `${artist.name}, `;
+                  })}
+                </p>
+              );
+            })}
+          </Column>
+        </Row>
+      </Grid>
     </>
   );
 };

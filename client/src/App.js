@@ -55,8 +55,7 @@ function App() {
               <Routes>
                 <Route path='/short' element={<ShortTerm />}></Route>
                 <Route path='/med' element={<MediumTerm />}></Route>
-                <Route path='long' element={<LongTerm />}></Route>
-                <Route path='/playlists' element={<h1>Playlists</h1>}></Route>
+                <Route path='/long' element={<LongTerm />}></Route>
                 <Route exact path='/' element={<Profile />}></Route>
               </Routes>
               {/* </ScrollToTop> */}
