@@ -5,13 +5,6 @@ import ChartComponent from './ChartComponent';
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
-const StyledTermContainer = styled.main`
-  display: grid;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
 
 const StyledBackButton = styled.button`
   position: absolute;
