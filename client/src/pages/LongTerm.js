@@ -87,7 +87,7 @@ const LongTerm = () => {
       </Link>
       <div className='flexbox-container'>
         <h1>Your Long Term Donut!</h1>
-        {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :(</p>}
+        {result.length > 0 ? <ChartComponent data={result} /> : <p>oops :( not logged in!</p>}
       </div>
       <Grid>
         <Row>

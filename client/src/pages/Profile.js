@@ -44,26 +44,29 @@ const Profile = () => {
   return (
     <>
       <StyledProfileContainer>
-        {profile && (
+        {!profile ? (
+          <h1>Not logged in! Click Log Out and then log back in.</h1>
+        ) : (
           <>
             <h1>Hi, {profile.display_name}!</h1>
             <p>You have {profile.followers.total} followers.</p>
             {profile.images.length && profile.images[0].url && (
               <img src={profile.images[0].url} alt='Avatar' />
             )}
+
+            <div>
+              <StyledLinkButton>
+                <a href='/short'>Short Term</a>
+              </StyledLinkButton>
+              <StyledLinkButton>
+                <a href='/med'>Medium Term</a>
+              </StyledLinkButton>
+              <StyledLinkButton>
+                <a href='/long'>Long Term</a>
+              </StyledLinkButton>
+            </div>
           </>
         )}
-        <div>
-          <StyledLinkButton>
-            <a href='/short'>Short Term</a>
-          </StyledLinkButton>
-          <StyledLinkButton>
-            <a href='/med'>Medium Term</a>
-          </StyledLinkButton>
-          <StyledLinkButton>
-            <a href='/long'>Long Term</a>
-          </StyledLinkButton>
-        </div>
       </StyledProfileContainer>
     </>
   );
