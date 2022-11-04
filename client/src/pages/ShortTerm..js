@@ -103,7 +103,7 @@ const ShortTerm = () => {
                 <p key={artist.id}>
                   <img
                     src={artist.images[0].url}
-                    style={{ width: '15%', height: '10%' }}
+                    style={{ width: '15%', height: '15%' }}
                     alt='Artist'
                   />
                   {' '}{artist.name}
@@ -118,7 +118,7 @@ const ShortTerm = () => {
                 <p key={track.id}>
                   <img
                     src={track.album.images[0].url}
-                    style={{ width: '11%', height: '10%' }}
+                    style={{ width: '11%', height: '11%' }}
                     alt='Track'
                   />
                   {' '}{track.name}
